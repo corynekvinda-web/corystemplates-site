@@ -142,6 +142,23 @@
   .tour .poster .t{font-size:20px;font-weight:700}
   .tour .poster .s{color:var(--muted);font-size:15px}
 
+  /* ---------- clips ---------- */
+  .clips{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+    gap:18px;margin-top:38px;
+  }
+  .clip{
+    background:linear-gradient(180deg,var(--panel-2),var(--panel));
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .clip video{width:100%;aspect-ratio:1088/1408;object-fit:cover;display:block;background:#000}
+  .clip .meta{padding:12px 14px 14px;display:flex;flex-direction:column;gap:3px}
+  .clip .name{font-weight:650;font-size:15px;line-height:1.3}
+  .clip a.etsy{color:var(--accent-bright);text-decoration:none;font-size:13.5px;font-weight:600}
+  .clip a.etsy:hover{text-decoration:underline}
+  @media (max-width:640px){ .clips{grid-template-columns:repeat(2,1fr);gap:12px} }
+
   /* ---------- principles ---------- */
   .principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:38px}
   .principle{
@@ -182,6 +199,7 @@
       <a href="#builder">Free Builder</a>
       <a href="#app">BLOC Planner</a>
       <a href="#shop">Shop</a>
+      <a href="#clips">Clips</a>
       <a href="#about">About</a>
       <a class="cta" href="https://gridcraft-studio-gules.vercel.app">Open the builder</a>
     </nav>
@@ -288,6 +306,96 @@
     </div>
   </section>
 
+  <!-- CLIPS -->
+  <section id="clips">
+    <div class="wrap">
+      <p class="kicker">Short clips</p>
+      <h2>See the planners — 15 seconds each</h2>
+      <p class="lede">Tap any clip for a quick flip-through. Like what you see, the link under it takes you straight to that planner.</p>
+      <div class="clips">
+
+        <div class="clip">
+          <video preload="none" playsinline controls poster="clips/flagship-bundle-15s.jpg" src="clips/flagship-bundle-15s.mp4"></video>
+          <div class="meta"><span class="name">2027 Planner Bundle — the flagship</span>
+          <a class="etsy" href="https://www.etsy.com/listing/4611463068">See it on Etsy &rarr;</a></div>
+        </div>
+
+        <div class="clip">
+          <video preload="none" playsinline controls poster="clips/undated-planner-15s.jpg" src="clips/undated-planner-15s.mp4"></video>
+          <div class="meta"><span class="name">Undated Planner — start any day</span>
+          <a class="etsy" href="https://www.etsy.com/listing/4609365429">See it on Etsy &rarr;</a></div>
+        </div>
+
+        <div class="clip">
+          <video preload="none" playsinline controls poster="clips/planner-bundle-15s.jpg" src="clips/planner-bundle-15s.mp4"></video>
+          <div class="meta"><span class="name">Planner Bundle</span>
+          <a class="etsy" href="https://www.etsy.com/listing/4609406063">See it on Etsy &rarr;</a></div>
+        </div>
+
+        <div class="clip">
+          <video preload="none" playsinline controls poster="clips/bundle-7am7pm-15s.jpg" src="clips/bundle-7am7pm-15s.mp4"></video>
+          <div class="meta"><span class="name">Hourly Planner — 7 AM to 7 PM</span>
+          <a class="etsy" href="https://www.etsy.com/shop/CorysTemplates">See it on Etsy &rarr;</a></div>
+        </div>
+
+        <div class="clip">
+          <video preload="none" playsinline controls poster="clips/bundle-5am5pm-15s.jpg" src="clips/bundle-5am5pm-15s.mp4"></video>
+          <div class="meta"><span class="name">Hourly Planner — 5 AM to 5 PM</span>
+          <a class="etsy" href="https://www.etsy.com/shop/CorysTemplates">See it on Etsy &rarr;</a></div>
+        </div>
+
+        <div class="clip">
+          <video preload="none" playsinline controls poster="clips/bundle-7pm7am-15s.jpg" src="clips/bundle-7pm7am-15s.mp4"></video>
+          <div class="meta"><span class="name">Night Shift — 7 PM to 7 AM</span>
+          <a class="etsy" href="https://www.etsy.com/shop/CorysTemplates">See it on Etsy &rarr;</a></div>
+        </div>
+
+        <div class="clip">
+          <video preload="none" playsinline controls poster="clips/project-planner-15s.jpg" src="clips/project-planner-15s.mp4"></video>
+          <div class="meta"><span class="name">Project Planner</span>
+          <a class="etsy" href="https://www.etsy.com/listing/4609178864">See it on Etsy &rarr;</a></div>
+        </div>
+
+        <div class="clip">
+          <video preload="none" playsinline controls poster="clips/meetings-planner-15s.jpg" src="clips/meetings-planner-15s.mp4"></video>
+          <div class="meta"><span class="name">Meetings Planner</span>
+          <a class="etsy" href="https://www.etsy.com/listing/4609385429">See it on Etsy &rarr;</a></div>
+        </div>
+
+        <div class="clip">
+          <video preload="none" playsinline controls poster="clips/habit-tracker-15s.jpg" src="clips/habit-tracker-15s.mp4"></video>
+          <div class="meta"><span class="name">Habit Tracker</span>
+          <a class="etsy" href="https://www.etsy.com/listing/4609403877">See it on Etsy &rarr;</a></div>
+        </div>
+
+        <div class="clip">
+          <video preload="none" playsinline controls poster="clips/one-week-journal-15s.jpg" src="clips/one-week-journal-15s.mp4"></video>
+          <div class="meta"><span class="name">One-Week Journal</span>
+          <a class="etsy" href="https://www.etsy.com/listing/4611011507">See it on Etsy &rarr;</a></div>
+        </div>
+
+        <div class="clip">
+          <video preload="none" playsinline controls poster="clips/adhd-weekly-15s.jpg" src="clips/adhd-weekly-15s.mp4"></video>
+          <div class="meta"><span class="name">Focus-Friendly Weekly Planner</span>
+          <a class="etsy" href="https://www.etsy.com/listing/4610218206">See it on Etsy &rarr;</a></div>
+        </div>
+
+        <div class="clip">
+          <video preload="none" playsinline controls poster="clips/memory-palace-15s.jpg" src="clips/memory-palace-15s.mp4"></video>
+          <div class="meta"><span class="name">Memory Palace Workbook</span>
+          <a class="etsy" href="https://www.etsy.com/listing/4610243803">See it on Etsy &rarr;</a></div>
+        </div>
+
+        <div class="clip">
+          <video preload="none" playsinline controls poster="clips/shit-list-15s.jpg" src="clips/shit-list-15s.mp4"></video>
+          <div class="meta"><span class="name">My Shit List — the get-it-done list</span>
+          <a class="etsy" href="https://www.etsy.com/listing/4610280150">See it on Etsy &rarr;</a></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- PRINCIPLES -->
   <section>
     <div class="wrap">
@@ -351,6 +459,15 @@
     f.setAttribute('allowfullscreen', '');
     f.title = 'BLOC Planner tour';
     this.replaceWith(f);
+  });
+
+  // Clips: only one plays at a time.
+  document.querySelectorAll('.clip video').forEach(function (v) {
+    v.addEventListener('play', function () {
+      document.querySelectorAll('.clip video').forEach(function (o) {
+        if (o !== v) o.pause();
+      });
+    });
   });
 
   // Visit counting (GoatCounter) — live domains only, so previews stay clean.
