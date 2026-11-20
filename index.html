@@ -182,6 +182,22 @@
   .sell-row .note{color:var(--muted);font-size:14.5px}
   @media (max-width:640px){ .feat-grid{grid-template-columns:1fr} }
 
+  /* ---------- examples ---------- */
+  .ex-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));
+    gap:20px;margin-top:38px;
+  }
+  .ex{
+    background:linear-gradient(180deg,var(--panel-2),var(--panel));
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .ex img{width:100%;height:auto;display:block;background:#fff}
+  .ex .meta{padding:12px 14px 14px;display:flex;flex-direction:column;gap:3px}
+  .ex .name{font-weight:650;font-size:15px;line-height:1.3}
+  .ex .cap{color:var(--muted);font-size:13.5px;line-height:1.5}
+  @media (max-width:640px){ .ex-grid{grid-template-columns:repeat(2,1fr);gap:12px} }
+
   /* ---------- principles ---------- */
   .principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:38px}
   .principle{
@@ -414,6 +430,60 @@
         <span style="flex:1"></span>
         <a class="btn primary" href="https://apps.microsoft.com/detail/9PJZWFSBTDR9">Get BLOC Planner</a>
         <a class="btn ghost" href="https://corystemplates-demo.vercel.app">Try the web demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXAMPLES -->
+  <section id="examples">
+    <div class="wrap">
+      <p class="kicker">Made with the builder</p>
+      <h2>Clean pages, one job each</h2>
+      <p class="lede">Real pages built with the free builder, each with Cory&rsquo;s Templates mark faded behind the widgets. Simple layouts you&rsquo;ll actually fill in — no hundred-page chaos.</p>
+      <div class="ex-grid">
+
+        <div class="ex">
+          <img src="examples/ex-cover.jpg" alt="Cover page with the Cory's Templates logo" loading="lazy">
+          <div class="meta"><span class="name">Cover page</span>
+          <span class="cap">Your logo as the page background — every planner starts with a cover that looks like yours.</span></div>
+        </div>
+
+        <div class="ex">
+          <img src="examples/ex-daily.jpg" alt="Daily page with timeblock, priorities, to-do list and notes" loading="lazy">
+          <div class="meta"><span class="name">Daily page</span>
+          <span class="cap">Timeblock down the left, top priorities, to-dos and notes on the right. One day, one sheet.</span></div>
+        </div>
+
+        <div class="ex">
+          <img src="examples/ex-journal.jpg" alt="Journal page with a ruled entry area and a mood tracker" loading="lazy">
+          <div class="meta"><span class="name">Journal page</span>
+          <span class="cap">A full ruled page for the day&rsquo;s entry, with a mood, energy, sleep and water tracker underneath.</span></div>
+        </div>
+
+        <div class="ex">
+          <img src="examples/ex-study.jpg" alt="Study guide page with Cornell notes, key terms and a review checklist" loading="lazy">
+          <div class="meta"><span class="name">Study guide</span>
+          <span class="cap">Cornell notes with a cues column and summary box, a key-terms table and a review checklist beside it.</span></div>
+        </div>
+
+        <div class="ex">
+          <img src="examples/ex-food.jpg" alt="Food diary page with meals table, daily habits and a notes strip" loading="lazy">
+          <div class="meta"><span class="name">Food diary</span>
+          <span class="cap">Meals, daily habits and how you felt — the whole day of eating on one sheet.</span></div>
+        </div>
+
+        <div class="ex">
+          <img src="examples/ex-weekly.jpg" alt="Weekly spread with week overview, priorities, to-dos and notes" loading="lazy">
+          <div class="meta"><span class="name">Weekly spread</span>
+          <span class="cap">The week at a glance up top, priorities and to-dos below, and a notes column down the side.</span></div>
+        </div>
+
+        <div class="ex">
+          <img src="examples/ex-monthly.jpg" alt="Monthly overview with a December 2026 calendar, goals and bills due" loading="lazy">
+          <div class="meta"><span class="name">Monthly overview</span>
+          <span class="cap">A full month calendar with room underneath for the month&rsquo;s goals and bills.</span></div>
+        </div>
+
       </div>
     </div>
   </section>
