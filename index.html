@@ -159,6 +159,29 @@
   .clip a.etsy:hover{text-decoration:underline}
   @media (max-width:640px){ .clips{grid-template-columns:repeat(2,1fr);gap:12px} }
 
+  /* ---------- feature clips (landscape) ---------- */
+  .feat-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));
+    gap:20px;margin-top:38px;
+  }
+  .feat{
+    background:linear-gradient(180deg,var(--panel-2),var(--panel));
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .feat video{width:100%;aspect-ratio:8/5;object-fit:cover;display:block;background:#000}
+  .feat .meta{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px}
+  .feat .name{font-weight:650;font-size:16px;line-height:1.3}
+  .feat .cap{color:var(--muted);font-size:14px;line-height:1.5}
+  .sell-row{
+    display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:26px;
+    background:linear-gradient(180deg,var(--panel-2),var(--panel));
+    border:1px solid var(--line);border-radius:14px;padding:18px 20px;
+  }
+  .sell-row .price{font-size:19px;font-weight:700}
+  .sell-row .note{color:var(--muted);font-size:14.5px}
+  @media (max-width:640px){ .feat-grid{grid-template-columns:1fr} }
+
   /* ---------- principles ---------- */
   .principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:38px}
   .principle{
@@ -197,6 +220,7 @@
     <a class="brand" href="#top"><img src="logo.png" alt="Cory's Templates logo">Cory&rsquo;s Templates</a>
     <nav>
       <a href="#builder">Free Builder</a>
+      <a href="#features">Features</a>
       <a href="#app">BLOC Planner</a>
       <a href="#shop">Shop</a>
       <a href="#clips">Clips</a>
@@ -269,6 +293,91 @@
           <span class="t">Watch BLOC Planner in action</span>
           <span class="s">The full tour — build a year planner, add pages, drop in widgets. About 4 minutes.</span>
         </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FREE BUILDER FEATURES -->
+  <section id="features">
+    <div class="wrap">
+      <p class="kicker">Free builder — in action</p>
+      <h2>What the free builder does</h2>
+      <p class="lede">Short clips, recorded in the builder itself. No account, no cost — open it and try every one of these.</p>
+      <div class="feat-grid">
+
+        <div class="feat">
+          <video preload="none" playsinline controls poster="features/feat-wizard.jpg" src="features/feat-wizard.mp4"></video>
+          <div class="meta"><span class="name">A whole month in one go</span>
+          <span class="cap">Pick a start date and the wizard builds the cover, the month view and every daily page — all linked together.</span></div>
+        </div>
+
+        <div class="feat">
+          <video preload="none" playsinline controls poster="features/feat-widgets.jpg" src="features/feat-widgets.mp4"></video>
+          <div class="meta"><span class="name">Widgets: drag, drop, done</span>
+          <span class="cap">Schedules, priorities, notes, habit trackers — place them, size them, make the page yours.</span></div>
+        </div>
+
+        <div class="feat">
+          <video preload="none" playsinline controls poster="features/feat-tabs.jpg" src="features/feat-tabs.mp4"></video>
+          <div class="meta"><span class="name">Binder tabs that jump</span>
+          <span class="cap">Add section dividers and every page gets side tabs. Tap one to jump straight to that section.</span></div>
+        </div>
+
+        <div class="feat">
+          <video preload="none" playsinline controls poster="features/feat-photo.jpg" src="features/feat-photo.mp4"></video>
+          <div class="meta"><span class="name">Your photo as the background</span>
+          <span class="cap">Drop in a logo or photo and slide the transparency until it sits just right behind your page.</span></div>
+        </div>
+
+        <div class="feat">
+          <video preload="none" playsinline controls poster="features/feat-sizes.jpg" src="features/feat-sizes.mp4"></video>
+          <div class="meta"><span class="name">Sizes for the popular tablets</span>
+          <span class="cap">reMarkable Paper Pro, Kindle Scribe, iPad, US Letter and more — switch any time and the planner refits.</span></div>
+        </div>
+
+        <div class="feat">
+          <video preload="none" playsinline controls poster="features/feat-export.jpg" src="features/feat-export.mp4"></video>
+          <div class="meta"><span class="name">Export a linked PDF</span>
+          <span class="cap">One click compiles your planner into a hyperlinked PDF, ready for your tablet.</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PAID APP FEATURES -->
+  <section id="app-clips">
+    <div class="wrap">
+      <p class="kicker">BLOC Planner — the full app</p>
+      <h2>What the paid app adds</h2>
+      <p class="lede">Everything the free builder does, plus the big stuff. These clips are recorded in the app itself.</p>
+      <div class="feat-grid">
+
+        <div class="feat">
+          <video preload="none" playsinline controls poster="features/app-year.jpg" src="features/app-year.mp4"></video>
+          <div class="meta"><span class="name">A full year — 432 pages</span>
+          <span class="cap">The app builds an entire year at once: cover, year-at-a-glance, months, weeks and days, all linked.</span></div>
+        </div>
+
+        <div class="feat">
+          <video preload="none" playsinline controls poster="features/app-sizes43.jpg" src="features/app-sizes43.mp4"></video>
+          <div class="meta"><span class="name">All 43 page sizes</span>
+          <span class="cap">Every device and paper size — including the reMarkable Move — and each one resizes the whole planner to fit.</span></div>
+        </div>
+
+        <div class="feat">
+          <video preload="none" playsinline controls poster="features/app-templates.jpg" src="features/app-templates.mp4"></video>
+          <div class="meta"><span class="name">30 starter templates built in</span>
+          <span class="cap">Planners, work, school, family and journals — open one and start, or add its pages to your own build.</span></div>
+        </div>
+
+      </div>
+      <div class="sell-row">
+        <span class="price">$15.99 once</span>
+        <span class="note">No subscription, no account. Yours to keep — and the free builder stays free.</span>
+        <span style="flex:1"></span>
+        <a class="btn primary" href="https://apps.microsoft.com/detail/9PJZWFSBTDR9">Get BLOC Planner</a>
+        <a class="btn ghost" href="https://corystemplates-demo.vercel.app">Try the web demo</a>
       </div>
     </div>
   </section>
@@ -456,9 +565,9 @@
   });
 
   // Clips: only one plays at a time.
-  document.querySelectorAll('.clip video').forEach(function (v) {
+  document.querySelectorAll('.clip video, .feat video').forEach(function (v) {
     v.addEventListener('play', function () {
-      document.querySelectorAll('.clip video').forEach(function (o) {
+      document.querySelectorAll('.clip video, .feat video').forEach(function (o) {
         if (o !== v) o.pause();
       });
     });
