@@ -198,6 +198,18 @@
   .ex .cap{color:var(--muted);font-size:13.5px;line-height:1.5}
   @media (max-width:640px){ .ex-grid{grid-template-columns:repeat(2,1fr);gap:12px} }
 
+  /* ---------- coming soon ---------- */
+  .soon{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+    gap:16px 28px;margin-top:36px;
+  }
+  .soon .item{
+    border-left:3px solid var(--accent);padding:2px 0 2px 14px;
+  }
+  .soon .item b{display:block;font-size:15.5px;margin-bottom:2px}
+  .soon .item span{color:var(--muted);font-size:14px;line-height:1.5}
+  @media (max-width:640px){ .soon{grid-template-columns:1fr} }
+
   /* ---------- principles ---------- */
   .principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:38px}
   .principle{
@@ -430,6 +442,38 @@
         <span style="flex:1"></span>
         <a class="btn primary" href="https://apps.microsoft.com/detail/9PJZWFSBTDR9">Get BLOC Planner</a>
         <a class="btn ghost" href="https://corystemplates-demo.vercel.app">Try the web demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMING SOON -->
+  <section id="coming-soon">
+    <div class="wrap">
+      <p class="kicker">Coming soon</p>
+      <h2>Future updates — free for owners</h2>
+      <p class="lede">BLOC Planner is $15.99 once, and it keeps growing. These are the updates in the works — when they land, everyone who owns the app gets them free.</p>
+      <div class="soon">
+
+        <div class="item"><b>60+ symbols</b><span>A much bigger symbol library, grouped by work, school, family, health, money, travel, home and seasons.</span></div>
+
+        <div class="item"><b>Format once, apply everywhere</b><span>Style a widget once and apply it to every matching widget across your daily pages — or stamp a widget onto every daily page in one go.</span></div>
+
+        <div class="item"><b>Your own templates, in folders</b><span>Save your pages, planners and widgets as templates in your own library, organized in folders, ready to drop into the next planner.</span></div>
+
+        <div class="item"><b>School-year &amp; custom spans</b><span>Build August–May school years, 18-month planners, fiscal years — or any start and end months you pick.</span></div>
+
+        <div class="item"><b>US holidays built in</b><span>Holidays printed on the right days in your month calendars and daily pages.</span></div>
+
+        <div class="item"><b>Restyle the whole planner</b><span>Change the colors of every page at once, without rebuilding a thing.</span></div>
+
+        <div class="item"><b>Export just part of it</b><span>Export one month, a page range, or only your weekly pages instead of the whole planner.</span></div>
+
+        <div class="item"><b>Heading fonts</b><span>A set of bundled fonts for titles and headings.</span></div>
+
+        <div class="item"><b>Widget packs</b><span>Themed widget sets for work, school and family, added to the palette.</span></div>
+
+        <div class="item"><b>A shelf for your planners</b><span>Every saved planner on one home screen, with cover thumbnails — no hunting for files.</span></div>
+
       </div>
     </div>
   </section>
