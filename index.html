@@ -878,8 +878,25 @@
         fetch(NS + '/get/corystemplates-poll/' + o[0]).then(function (r) { return r.json(); })
           .then(function (j) { acc[o[0]] = (j && typeof j.value === 'number') ? j.value : 0; })
           .catch(function () { acc[o[0]] = 0; })
-          .then(function () { if (++done === OPTIONS.length) { counts = acc; render(); } });
+          .then(function () {
+            if (++done === OPTIONS.length) {
+              // Never let a slow tally load erase a vote cast while it loaded.
+              if (voted && counts) { OPTIONS.forEach(function (o) { acc[o[0]] = Math.max(acc[o[0]] || 0, counts[o[0]] || 0); }); }
+              counts = acc; render();
+            }
+          });
       });
+    }
+
+    function sendHit(key, tries) {
+      fetch(NS + '/hit/corystemplates-poll/' + key).then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (j && typeof j.value === 'number') {
+            try { localStorage.removeItem('ct_poll_pending'); } catch (e) {}
+            if (counts) { counts[key] = j.value; render(); }
+          } else if (tries > 0) { setTimeout(function () { sendHit(key, tries - 1); }, 1500); }
+        })
+        .catch(function () { if (tries > 0) setTimeout(function () { sendHit(key, tries - 1); }, 1500); });
     }
 
     function vote(key) {
@@ -890,13 +907,17 @@
       if (demoMode) { counts = Object.assign({}, DEMO); counts[key]++; render(); return; }
       counts[key] = (counts[key] || 0) + 1;
       render();
-      fetch(NS + '/hit/corystemplates-poll/' + key).then(function (r) { return r.json(); })
-        .then(function (j) { if (j && typeof j.value === 'number') { counts[key] = j.value; render(); } })
-        .catch(function () {});
+      try { localStorage.setItem('ct_poll_pending', key); } catch (e) {}
+      sendHit(key, 3);
     }
 
     render();
     load();
+    // If an earlier vote never reached the counter, send it again now.
+    try {
+      var pending = localStorage.getItem('ct_poll_pending');
+      if (pending && pending === voted && !demoMode) sendHit(pending, 2);
+    } catch (e) {}
   })();
 
   // Visit counting (GoatCounter) — live domains only, so previews stay clean.
