@@ -705,6 +705,7 @@
 <script>
   // Tour video: load the Drive player only when clicked.
   document.getElementById('tourPoster').addEventListener('click', function () {
+    siteEvent('site-tour-click', 'Site: Tour Play');
     var f = document.createElement('iframe');
     f.className = 'stage';
     f.src = 'https://drive.google.com/file/d/1AywUN7-oDhANgFWvuCmjH5ixhbUuZF98/preview';
@@ -721,6 +722,21 @@
         if (o !== v) o.pause();
       });
     });
+  });
+
+  // Button clicks worth counting (GoatCounter events on the site's own tracker).
+  function siteEvent(name, title) {
+    if (window.goatcounter && window.goatcounter.count) {
+      window.goatcounter.count({ path: name, title: title, event: true });
+    }
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a') : null;
+    if (!a) return;
+    var h = a.href || '';
+    if (h.indexOf('gridcraft-studio-gules.vercel.app') !== -1) siteEvent('site-builder-click', 'Site: Free Builder Click');
+    else if (h.indexOf('apps.microsoft.com') !== -1) siteEvent('site-app-click', 'Site: BLOC App Click');
+    else if (h.indexOf('corystemplates-demo.vercel.app') !== -1) siteEvent('site-demo-click', 'Site: Demo Click');
   });
 
   // Visit counting (GoatCounter) — live domains only, so previews stay clean.
