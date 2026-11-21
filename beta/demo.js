@@ -171,8 +171,14 @@
   }
 
   function installGuards() {
-    ['saveProjectToFile', 'saveProjectJson', 'exportHyperlinkedPdf', 'openExportModal',
-     'buildHyperlinkedPdfBytes', 'buildNativeFallbackPdfBytes'].forEach(guardFn);
+    /* buildHyperlinkedPdfBytes / buildNativeFallbackPdfBytes are NOT guarded:
+       the new build calls them internally to render projects-shelf thumbnails
+       (renderPageThumb in features.js), so blocking them popped the export
+       note after nearly every action. They only return bytes in memory —
+       every path that hands a PDF or file to the user goes through
+       openExportModal / exportHyperlinkedPdf / saveProjectToFile, which
+       stay guarded below. */
+    ['saveProjectToFile', 'saveProjectJson', 'exportHyperlinkedPdf', 'openExportModal'].forEach(guardFn);
 
     var printFn = window.print.bind(window);
     window.print = function () { showExportBlocked(); };
