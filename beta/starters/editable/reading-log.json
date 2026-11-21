@@ -1,0 +1,112 @@
+{
+  "title": "Reading Log",
+  "preset": "ipad_portrait",
+  "width": 768,
+  "height": 1024,
+  "zoom": 0.85,
+  "snapEnabled": true,
+  "previewLinks": false,
+  "tabMode": "color",
+  "activePageId": "page_m6xjlu9r059",
+  "selectedWidgetId": null,
+  "pages": [
+    {
+      "id": "page_m6xjlu9r059",
+      "name": "Reading Log",
+      "templateType": "blank",
+      "section": "Reading",
+      "dateISO": "",
+      "bgColor": "#ffffff",
+      "bgImage": "",
+      "bgOpacity": 0.25,
+      "widgets": [
+        {
+          "id": "w_rs1qwsqy056",
+          "type": "navtab",
+          "x": 36,
+          "y": 32,
+          "width": 696,
+          "height": 56,
+          "fontSize": 15,
+          "accentColor": "#0f172a",
+          "bgColor": "#0f172a",
+          "borderColor": "transparent",
+          "borderWidth": 0,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "READING LOG",
+          "subtitle": "Every book, one row",
+          "textColor": "#ffffff",
+          "align": "left"
+        },
+        {
+          "id": "w_eg0g6brp057",
+          "type": "logbook",
+          "x": 36,
+          "y": 104,
+          "width": 696,
+          "height": 560,
+          "fontSize": 12,
+          "accentColor": "#0f172a",
+          "bgColor": "#ffffff",
+          "borderColor": "#cbd5e1",
+          "borderWidth": 1,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "BOOKS",
+          "rows": 14,
+          "headers": [
+            "Book",
+            "Author",
+            "Started",
+            "Finished",
+            "Rating"
+          ],
+          "colWidths": [
+            0.34,
+            0.24,
+            0.15,
+            0.15,
+            0.12
+          ],
+          "rowHeights": [
+            0.07142857142857142,
+            0.07142857142857142,
+            0.07142857142857142,
+            0.07142857142857142,
+            0.07142857142857142,
+            0.07142857142857142,
+            0.07142857142857142,
+            0.07142857142857142,
+            0.07142857142857142,
+            0.07142857142857142,
+            0.07142857142857142,
+            0.07142857142857142,
+            0.07142857142857142,
+            0.07142857142857142
+          ],
+          "rowSpacing": 38.29
+        },
+        {
+          "id": "w_dn6acqgw058",
+          "type": "notes",
+          "x": 36,
+          "y": 680,
+          "width": 696,
+          "height": 296,
+          "fontSize": 12,
+          "accentColor": "#0f172a",
+          "bgColor": "#ffffff",
+          "borderColor": "#cbd5e1",
+          "borderWidth": 1,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "FAVORITE LINES & THOUGHTS",
+          "pattern": "ruled",
+          "spacing": 20,
+          "lines": 14
+        }
+      ]
+    }
+  ]
+}

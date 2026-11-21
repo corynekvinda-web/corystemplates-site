@@ -1,0 +1,131 @@
+{
+  "title": "Workout Log",
+  "preset": "ipad_portrait",
+  "width": 768,
+  "height": 1024,
+  "zoom": 0.85,
+  "snapEnabled": true,
+  "previewLinks": false,
+  "tabMode": "color",
+  "activePageId": "page_p2h1jdek064",
+  "selectedWidgetId": null,
+  "pages": [
+    {
+      "id": "page_p2h1jdek064",
+      "name": "Workout Log",
+      "templateType": "blank",
+      "section": "Health",
+      "dateISO": "",
+      "bgColor": "#ffffff",
+      "bgImage": "",
+      "bgOpacity": 0.25,
+      "widgets": [
+        {
+          "id": "w_t05vhllx060",
+          "type": "navtab",
+          "x": 36,
+          "y": 32,
+          "width": 696,
+          "height": 56,
+          "fontSize": 15,
+          "accentColor": "#0f172a",
+          "bgColor": "#0f172a",
+          "borderColor": "transparent",
+          "borderWidth": 0,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "WORKOUT LOG",
+          "subtitle": "Sessions, sets, and how it felt",
+          "textColor": "#ffffff",
+          "align": "left"
+        },
+        {
+          "id": "w_vp8c7dmg061",
+          "type": "logbook",
+          "x": 36,
+          "y": 104,
+          "width": 696,
+          "height": 480,
+          "fontSize": 12,
+          "accentColor": "#0f172a",
+          "bgColor": "#ffffff",
+          "borderColor": "#cbd5e1",
+          "borderWidth": 1,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "SESSIONS",
+          "rows": 12,
+          "headers": [
+            "Date",
+            "Workout",
+            "Sets / Reps",
+            "How it felt"
+          ],
+          "colWidths": [
+            0.16,
+            0.3,
+            0.24,
+            0.3
+          ],
+          "rowHeights": [
+            0.08333333333333333,
+            0.08333333333333333,
+            0.08333333333333333,
+            0.08333333333333333,
+            0.08333333333333333,
+            0.08333333333333333,
+            0.08333333333333333,
+            0.08333333333333333,
+            0.08333333333333333,
+            0.08333333333333333,
+            0.08333333333333333,
+            0.08333333333333333
+          ],
+          "rowSpacing": 38.0
+        },
+        {
+          "id": "w_ykzbchnp062",
+          "type": "habit",
+          "x": 36,
+          "y": 600,
+          "width": 696,
+          "height": 170,
+          "fontSize": 12,
+          "accentColor": "#0f172a",
+          "bgColor": "#ffffff",
+          "borderColor": "#cbd5e1",
+          "borderWidth": 1,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "THIS WEEK",
+          "days": 7,
+          "habits": [
+            "Workout",
+            "Stretch",
+            "Walk"
+          ],
+          "rowSpacing": 48.67
+        },
+        {
+          "id": "w_j641mb0r063",
+          "type": "notes",
+          "x": 36,
+          "y": 786,
+          "width": 696,
+          "height": 190,
+          "fontSize": 12,
+          "accentColor": "#0f172a",
+          "bgColor": "#ffffff",
+          "borderColor": "#cbd5e1",
+          "borderWidth": 1,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "NOTES & NEXT TIME",
+          "pattern": "dot",
+          "spacing": 20,
+          "lines": 8
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "title": "Bills & Budget \u2014 Month",
+  "preset": "ipad_portrait",
+  "width": 768,
+  "height": 1024,
+  "zoom": 0.85,
+  "snapEnabled": true,
+  "previewLinks": false,
+  "tabMode": "color",
+  "activePageId": "page_wcke0f3w055",
+  "selectedWidgetId": null,
+  "pages": [
+    {
+      "id": "page_wcke0f3w055",
+      "name": "Bills & Budget",
+      "templateType": "blank",
+      "section": "Money",
+      "dateISO": "",
+      "bgColor": "#ffffff",
+      "bgImage": "",
+      "bgOpacity": 0.25,
+      "widgets": [
+        {
+          "id": "w_x61smr7p051",
+          "type": "navtab",
+          "x": 36,
+          "y": 32,
+          "width": 696,
+          "height": 56,
+          "fontSize": 15,
+          "accentColor": "#0f172a",
+          "bgColor": "#0f172a",
+          "borderColor": "transparent",
+          "borderWidth": 0,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "BILLS & BUDGET",
+          "subtitle": "One month on one page",
+          "textColor": "#ffffff",
+          "align": "left"
+        },
+        {
+          "id": "w_ooba7kc3052",
+          "type": "logbook",
+          "x": 36,
+          "y": 104,
+          "width": 696,
+          "height": 400,
+          "fontSize": 12,
+          "accentColor": "#0f172a",
+          "bgColor": "#ffffff",
+          "borderColor": "#cbd5e1",
+          "borderWidth": 1,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "BILLS & MONEY",
+          "rows": 10,
+          "headers": [
+            "Bill",
+            "Due",
+            "Amount",
+            "Paid"
+          ],
+          "colWidths": [
+            0.36,
+            0.18,
+            0.2,
+            0.26
+          ],
+          "rowHeights": [
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1,
+            0.1
+          ],
+          "rowSpacing": 37.6
+        },
+        {
+          "id": "w_91f26797053",
+          "type": "logbook",
+          "x": 36,
+          "y": 520,
+          "width": 696,
+          "height": 320,
+          "fontSize": 12,
+          "accentColor": "#0f172a",
+          "bgColor": "#ffffff",
+          "borderColor": "#cbd5e1",
+          "borderWidth": 1,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "SPENDING LOG",
+          "rows": 8,
+          "headers": [
+            "Date",
+            "What",
+            "Category",
+            "Amount"
+          ],
+          "colWidths": [
+            0.18,
+            0.4,
+            0.24,
+            0.18
+          ],
+          "rowHeights": [
+            0.125,
+            0.125,
+            0.125,
+            0.125,
+            0.125,
+            0.125,
+            0.125,
+            0.125
+          ],
+          "rowSpacing": 37.0
+        },
+        {
+          "id": "w_2x5m7bg7054",
+          "type": "notes",
+          "x": 36,
+          "y": 856,
+          "width": 696,
+          "height": 120,
+          "fontSize": 12,
+          "accentColor": "#0f172a",
+          "bgColor": "#ffffff",
+          "borderColor": "#cbd5e1",
+          "borderWidth": 1,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "NOTES",
+          "pattern": "dot",
+          "spacing": 20,
+          "lines": 5
+        }
+      ]
+    }
+  ]
+}
