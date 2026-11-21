@@ -121,6 +121,11 @@
   }
 
   function mountChrome() {
+    var ipadNote = document.createElement('div');
+    ipadNote.id = 'ctIpadNote';
+    ipadNote.textContent = 'This demo is the iPad version — try it on an iPad. On a computer it looks exactly like the regular website version.';
+    document.body.insertBefore(ipadNote, document.body.firstChild);
+
     var banner = document.createElement('div');
     banner.id = 'ctBetaBanner';
     banner.innerHTML =
