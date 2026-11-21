@@ -1,0 +1,164 @@
+/* Public demo chrome: slim banner, export notes, feedback form. */
+html.ct-demo body { padding-top: 0; }
+
+#ctDemoBanner {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 2.25rem;
+  padding: 0.35rem 0.75rem;
+  background: #0b1220;
+  border-bottom: 1px solid #1e293b;
+  color: #e2e8f0;
+  font-size: 13px;
+  line-height: 1.3;
+  z-index: 80;
+}
+#ctDemoBanner .ct-demo-banner-text { min-width: 0; }
+#ctDemoBanner strong { font-weight: 600; color: #f8fafc; }
+#ctDemoSuggestBtn,
+.ct-demo-store-btn {
+  appearance: none;
+  border: 1px solid #334155;
+  background: #1e293b;
+  color: #f8fafc;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+#ctDemoSuggestBtn:hover,
+.ct-demo-store-btn:hover { background: #334155; }
+
+.ct-demo-export-note {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  max-width: 16rem;
+}
+.ct-demo-export-note .ct-demo-note-text {
+  font-size: 10px;
+  line-height: 1.3;
+  color: #94a3b8;
+  white-space: normal;
+  font-weight: 500;
+}
+#exportPdfBtn.ct-demo-blocked,
+#saveJsonBtn.ct-demo-blocked,
+#exportDirectDownloadLink.ct-demo-blocked,
+#exportOpenTabBtn.ct-demo-blocked,
+#exportCopyJsonBtn.ct-demo-blocked {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+#ctDemoBlocked,
+#ctDemoFeedback {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.72);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 90;
+}
+#ctDemoBlocked.is-open,
+#ctDemoFeedback.is-open { display: flex; }
+.ct-demo-card {
+  width: 100%;
+  max-width: 26rem;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.1rem 1.15rem 1.15rem;
+  color: #e2e8f0;
+  box-shadow: 0 20px 50px rgba(0,0,0,.45);
+}
+.ct-demo-card h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+.ct-demo-card p { margin: 0 0 0.75rem; font-size: 13px; color: #cbd5e1; line-height: 1.45; }
+.ct-demo-card label { display: block; font-size: 12px; font-weight: 600; color: #cbd5e1; margin: 0.55rem 0 0.2rem; }
+.ct-demo-card input,
+.ct-demo-card textarea {
+  width: 100%;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  color: #f8fafc;
+  font-size: 13px;
+  padding: 0.45rem 0.55rem;
+  font-family: inherit;
+}
+.ct-demo-card textarea { min-height: 5.5rem; resize: vertical; }
+.ct-demo-actions { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.9rem; }
+.ct-demo-card button[type="submit"],
+.ct-demo-primary {
+  background: #0369a1;
+  border: 1px solid #0284c7;
+  color: #fff;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.ct-demo-card .ct-demo-secondary {
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #e2e8f0;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Locked starter cards: a small badge, no extra banners or popups until they click. */
+.starter-card.ct-demo-starter-locked { position: relative; }
+.ct-demo-lock-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  background: #0f172a;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.15rem 0.45rem;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+.starter-card.ct-demo-starter-free { position: relative; }
+.ct-demo-free-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  background: #064e3b;
+  color: #ecfdf5;
+  border: 1px solid #34d399;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.15rem 0.45rem;
+  line-height: 1.2;
+  pointer-events: none;
+}
