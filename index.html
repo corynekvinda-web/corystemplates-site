@@ -446,34 +446,44 @@
     </div>
   </section>
 
-  <!-- COMING SOON -->
-  <section id="coming-soon">
+  <!-- BETA: NEXT UPDATE -->
+  <section id="beta">
     <div class="wrap">
-      <p class="kicker">Coming soon — app only</p>
-      <h2>The paid app keeps growing</h2>
-      <p class="lede">Every update below is for the BLOC Planner app only — the free web builder stays exactly as it is. Buy the app once for $15.99, and each of these lands free when it&rsquo;s ready.</p>
+      <p class="kicker">Beta &mdash; the next update</p>
+      <h2>Try the next update before it ships</h2>
+      <p class="lede">Everything below is built and in beta testing now, headed for the BLOC Planner app as a free update for owners. The free web builder stays exactly as it is. Try the new features right here in the beta demo &mdash; same rules as the regular demo: build and look around all you want; exporting, saving and printing stay in the app.</p>
       <div class="soon">
 
-        <div class="item"><b>A bigger symbol library</b><span>60+ symbols, grouped by work, school, family, health, money, travel, home and seasons.</span></div>
+        <div class="item"><b>77 symbols, in 8 categories</b><span>Work, school, family, health, money, travel, home and seasons &mdash; every one resizable, recolorable and linkable.</span></div>
 
-        <div class="item"><b>Format once, apply everywhere</b><span>Style one widget and apply that look to every matching widget in the planner — or stamp a widget onto every daily page at once.</span></div>
+        <div class="item"><b>Format once, apply everywhere</b><span>Style one widget and apply that look to every matching widget in the planner &mdash; or copy a widget onto every daily page at once.</span></div>
 
-        <div class="item"><b>Save your own templates — in folders</b><span>Keep your best pages, planners and widgets in a personal library, organized your way and ready to reuse.</span></div>
+        <div class="item"><b>Save your own templates &mdash; in folders</b><span>Keep your best pages, whole planners and single widgets in a personal library, organized your way and ready to reuse.</span></div>
 
-        <div class="item"><b>School-year &amp; custom spans</b><span>August–May school years, 18-month planners, fiscal years, or any months you choose.</span></div>
+        <div class="item"><b>School-year &amp; custom spans</b><span>August&ndash;May school years, 18-month planners, fiscal years, or any first and last month you choose.</span></div>
 
-        <div class="item"><b>US holidays, built in</b><span>Holidays appear on the right days in your calendars and daily pages, automatically.</span></div>
+        <div class="item"><b>US holidays, built in</b><span>Pick the holiday pack in the wizard and holidays print on the month calendars and the daily pages themselves.</span></div>
 
-        <div class="item"><b>Restyle the whole planner</b><span>One control recolors every page. The layouts stay put — only the colors change.</span></div>
+        <div class="item"><b>Restyle the whole planner</b><span>One control recolors every page &mdash; nine themes or your own color. Layouts stay put; only the colors change.</span></div>
 
-        <div class="item"><b>Export part of a planner</b><span>Send out a single month, a page range, or just the weekly pages.</span></div>
+        <div class="item"><b>Export part of a planner</b><span>Send out a page range, a single month, or just one kind of page instead of the whole file.</span></div>
 
-        <div class="item"><b>Fonts for headings</b><span>A set of bundled typefaces for titles and section headers.</span></div>
+        <div class="item"><b>Fonts for headings</b><span>Five bundled typefaces for titles and headers, embedded in your PDF.</span></div>
 
-        <div class="item"><b>Widget packs</b><span>Themed sets — work, school, family — that add ready-made widgets to the palette.</span></div>
+        <div class="item"><b>Widget packs</b><span>Ready-made boxes in Work, School and Family packs &mdash; project trackers, class schedules, meal plans and more.</span></div>
 
-        <div class="item"><b>A home shelf for your planners</b><span>All your saved planners in one place, with cover thumbnails.</span></div>
+        <div class="item"><b>A home shelf for your planners</b><span>Every planner you&rsquo;re working on, kept in the app with its cover picture.</span></div>
 
+        <div class="item"><b>10 editable templates, built in</b><span>Meeting notes, brain dump, habit tracker, budget and more &mdash; made of normal widgets, so every piece can be moved, changed or deleted.</span></div>
+
+        <div class="item"><b>Smoother background slider</b><span>The page-background image opacity slider now follows your drag all the way, start to finish.</span></div>
+
+      </div>
+      <div class="sell-row">
+        <a class="btn primary" href="beta/">Launch the beta demo &rarr;</a>
+        <span class="note">Demo rules: exporting, saving and printing are turned off in the demo &mdash; those live in the full app.</span>
+        <span style="flex:1"></span>
+        <a class="btn ghost" href="https://apps.microsoft.com/detail/9PJZWFSBTDR9">Get BLOC Planner &mdash; $15.99 once</a>
       </div>
     </div>
   </section>
@@ -736,6 +746,7 @@
     var h = a.href || '';
     if (h.indexOf('gridcraft-studio-gules.vercel.app') !== -1) siteEvent('site-builder-click', 'Site: Free Builder Click');
     else if (h.indexOf('apps.microsoft.com') !== -1) siteEvent('site-app-click', 'Site: BLOC App Click');
+    else if (h.indexOf('/beta') !== -1) siteEvent('site-beta-click', 'Site: Beta Demo Click');
     else if (h.indexOf('corystemplates-demo.vercel.app') !== -1) siteEvent('site-demo-click', 'Site: Demo Click');
   });
 
