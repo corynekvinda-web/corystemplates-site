@@ -1,0 +1,127 @@
+{
+  "title": "Monthly Habit Tracker",
+  "preset": "ipad_portrait",
+  "width": 768,
+  "height": 1024,
+  "zoom": 0.85,
+  "snapEnabled": true,
+  "previewLinks": false,
+  "tabMode": "color",
+  "activePageId": "page_cmi5pea1050",
+  "selectedWidgetId": null,
+  "pages": [
+    {
+      "id": "page_cmi5pea1050",
+      "name": "Monthly Habit Tracker",
+      "templateType": "habit_board",
+      "section": "Reference",
+      "dateISO": "",
+      "bgColor": "#ffffff",
+      "bgImage": "",
+      "bgOpacity": 0.25,
+      "widgets": [
+        {
+          "id": "w_8bcfiswq046",
+          "type": "navtab",
+          "x": 36,
+          "y": 32,
+          "width": 696,
+          "height": 56,
+          "fontSize": 15,
+          "accentColor": "#0f172a",
+          "bgColor": "#0f172a",
+          "borderColor": "transparent",
+          "borderWidth": 0,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "MONTHLY HABIT TRACKER",
+          "subtitle": "One row per habit, one column per day",
+          "textColor": "#ffffff",
+          "align": "left"
+        },
+        {
+          "id": "w_87b2tdqm047",
+          "type": "habit",
+          "x": 36,
+          "y": 104,
+          "width": 696,
+          "height": 320,
+          "fontSize": 12,
+          "accentColor": "#0f172a",
+          "bgColor": "#ffffff",
+          "borderColor": "#cbd5e1",
+          "borderWidth": 1,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "31-DAY TRACKER",
+          "days": 31,
+          "habits": [
+            "Exercise",
+            "Reading",
+            "Water",
+            "In bed on time",
+            "No sugar",
+            "Meditation"
+          ],
+          "rowSpacing": 49.33
+        },
+        {
+          "id": "w_7evmeqza048",
+          "type": "logbook",
+          "x": 36,
+          "y": 440,
+          "width": 696,
+          "height": 230,
+          "fontSize": 12,
+          "accentColor": "#0f172a",
+          "bgColor": "#ffffff",
+          "borderColor": "#cbd5e1",
+          "borderWidth": 1,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "WEEKLY ROLLUP",
+          "rows": 5,
+          "headers": [
+            "Week",
+            "Best day",
+            "Missed most",
+            "Notes"
+          ],
+          "colWidths": [
+            0.16,
+            0.28,
+            0.28,
+            0.28
+          ],
+          "rowHeights": [
+            0.2,
+            0.2,
+            0.2,
+            0.2,
+            0.2
+          ],
+          "rowSpacing": 41.2
+        },
+        {
+          "id": "w_ia51kbbr049",
+          "type": "notes",
+          "x": 36,
+          "y": 686,
+          "width": 696,
+          "height": 290,
+          "fontSize": 12,
+          "accentColor": "#0f172a",
+          "bgColor": "#ffffff",
+          "borderColor": "#cbd5e1",
+          "borderWidth": 1,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "WHAT WORKED, WHAT DIDN'T",
+          "pattern": "dot",
+          "spacing": 20,
+          "lines": 13
+        }
+      ]
+    }
+  ]
+}

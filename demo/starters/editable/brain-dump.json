@@ -1,0 +1,83 @@
+{
+  "title": "Brain Dump",
+  "preset": "ipad_portrait",
+  "width": 768,
+  "height": 1024,
+  "zoom": 0.85,
+  "snapEnabled": true,
+  "previewLinks": false,
+  "tabMode": "color",
+  "activePageId": "page_3avrdxsz045",
+  "selectedWidgetId": null,
+  "pages": [
+    {
+      "id": "page_3avrdxsz045",
+      "name": "Brain Dump",
+      "templateType": "blank",
+      "section": "Notes",
+      "dateISO": "",
+      "bgColor": "#ffffff",
+      "bgImage": "",
+      "bgOpacity": 0.25,
+      "widgets": [
+        {
+          "id": "w_cr7b5yl6042",
+          "type": "navtab",
+          "x": 36,
+          "y": 32,
+          "width": 696,
+          "height": 56,
+          "fontSize": 15,
+          "accentColor": "#0f172a",
+          "bgColor": "#0f172a",
+          "borderColor": "transparent",
+          "borderWidth": 0,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "BRAIN DUMP",
+          "subtitle": "Get it out of your head \u2014 sort it later",
+          "textColor": "#ffffff",
+          "align": "left"
+        },
+        {
+          "id": "w_00plxc6j043",
+          "type": "notes",
+          "x": 36,
+          "y": 104,
+          "width": 696,
+          "height": 690,
+          "fontSize": 12,
+          "accentColor": "#0f172a",
+          "bgColor": "#ffffff",
+          "borderColor": "#cbd5e1",
+          "borderWidth": 1,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "EVERYTHING ON YOUR MIND",
+          "pattern": "dot",
+          "spacing": 20,
+          "lines": 33
+        },
+        {
+          "id": "w_lhpvcos1044",
+          "type": "checkboxes",
+          "x": 36,
+          "y": 810,
+          "width": 696,
+          "height": 120,
+          "fontSize": 12,
+          "accentColor": "#0f172a",
+          "bgColor": "#ffffff",
+          "borderColor": "#cbd5e1",
+          "borderWidth": 1,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "KEEPERS \u2014 MOVE THESE TO A LIST",
+          "rows": 3,
+          "shape": "square",
+          "rowSpacing": 32.0
+        }
+      ]
+    }
+  ]
+}
