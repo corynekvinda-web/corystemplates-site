@@ -672,6 +672,8 @@
             <option value="simple">Simple day — top 3, to-do list &amp; a big notes area</option>
             <option value="work">Work day — schedule, tracking table, checklist &amp; notes</option>
           </select>
+          <label class="mt-2 flex items-start gap-2 cursor-pointer text-slate-200"><input id="wizSpread" type="checkbox" class="w-4 h-4 mt-0.5 accent-indigo-500" /> <span>Two days side by side <span class="text-slate-500">(double A5 spread — sets the page size to A4 landscape)</span></span></label>
+          <p class="mt-1 text-[11px] leading-snug text-amber-300/90">Preview: the spread layout is being tested in this web demo — it isn't in the Store app yet.</p>
         </div>
 
         <div class="flex items-center justify-between gap-3">
@@ -985,6 +987,7 @@ const PAGE_PRESETS = {
   ipad_landscape: { group: 'Apple iPad', label: 'iPad / GoodNotes — landscape (classic 4:3)', width: 1024, height: 768 },
   letter: { group: 'Paper (prints at exact size)', label: 'US Letter paper (8.5 × 11 in)', width: 765, height: 990, pdfWidth: 612, pdfHeight: 792 },
   a4: { group: 'Paper (prints at exact size)', label: 'A4 paper (210 × 297 mm)', width: 744, height: 1052, pdfWidth: 595.2756, pdfHeight: 841.8898 },
+  a4_landscape: { group: 'Paper (prints at exact size)', label: 'A4 landscape — double A5 spread (297 × 210 mm)', width: 1052, height: 744, pdfWidth: 841.8898, pdfHeight: 595.2756 },
   remarkable: { group: 'reMarkable', label: 'reMarkable Paper Pro (11.8″)', width: 760, height: 1012, note: 'Same shape as the 2160 × 1620 screen.' },
   supernote: { group: 'Supernote', label: 'Supernote Nomad (A6 X2) / Manta (A5 X2)', width: 720, height: 960, note: 'Same shape as the 1872 × 1404 / 2560 × 1920 screens.' },
   kindle_scribe: { group: 'Amazon Kindle', label: 'Kindle Scribe — all generations (incl. Colorsoft)', width: 750, height: 1000, note: 'Same shape as the 2480 × 1860 / 2640 × 1980 screens.' },
@@ -1490,7 +1493,7 @@ function findBestPageForDateISO(iso, excludePageId = '') {
   const ym = iso.slice(0, 7);
   for (const p of __P) {
     if (p.id === excludePageId || !p.dateISO) continue;
-    if (p.dateISO === iso) {
+    if (p.dateISO === iso || p.dateISO2 === iso) {
       if ((p.section || '') === 'Daily') return p;
       if (!exactAny) exactAny = p;
       continue;
@@ -4525,6 +4528,7 @@ function wizardOptionsFromForm() {
     weekly: document.getElementById('wizIncludeWeekly').checked,
     daily: document.getElementById('wizIncludeDaily').checked,
     dailyPreset: document.getElementById('wizDailyPreset').value || 'classic',
+    spread: Boolean(document.getElementById('wizSpread')?.checked),
     holidays: Boolean(document.getElementById('wizHolidays')?.checked),
     accent: normalizeHexColor(document.getElementById('wizAccentColor').value) || '#1E3A5F'
   };
@@ -4533,12 +4537,14 @@ function wizardOptionsFromForm() {
 function countPlannerPages(o) {
   let n = (o.cover ? 1 : 0) + (o.overview ? 1 : 0);
   let curMonth = '';
+  let dayCount = 0;
   for (let iso = o.startISO; iso <= o.endISO; iso = addDaysISO(iso, 1)) {
     const dt = parseISODateLocal(iso);
     if (iso.slice(0, 7) !== curMonth) { curMonth = iso.slice(0, 7); if (o.monthly) n++; }
     if (o.weekly && (dt.getDay() === 0 || iso === o.startISO)) n++;
-    if (o.daily) n++;
+    if (o.daily) dayCount++;
   }
+  n += (o.spread && o.daily) ? Math.ceil(dayCount / 2) : dayCount;
   return n;
 }
 
@@ -4612,6 +4618,7 @@ function generatePlannerPages(o) {
   const days = [];     // { iso, page, weekIdx, monthIdx }
   let cover = null;
   let overview = null;
+  let openPair = null;
 
   if (o.cover) { cover = newPlannerPage('Cover', 'General', o.startISO); pages.push(cover); }
   if (o.overview) {
@@ -4643,9 +4650,17 @@ function generatePlannerPages(o) {
       weeks.push(wk);
     }
     if (o.daily) {
-      const d = { iso, page: newPlannerPage(`Daily — ${formatReadableDate(iso)}`, 'Daily', iso), weekIdx: weeks.length - 1, monthIdx: months.length - 1 };
-      pages.push(d.page);
-      days.push(d);
+      if (o.spread && openPair) {
+        openPair.page.dateISO2 = iso;
+        openPair.page.name = `Spread — ${formatReadableDate(openPair.iso)} & ${formatReadableDate(iso)}`;
+        days.push({ iso, page: openPair.page, half: 1, weekIdx: weeks.length - 1, monthIdx: months.length - 1 });
+        openPair = null;
+      } else {
+        const d = { iso, page: newPlannerPage(o.spread ? `Spread — ${formatReadableDate(iso)}` : `Daily — ${formatReadableDate(iso)}`, 'Daily', iso), half: 0, weekIdx: weeks.length - 1, monthIdx: months.length - 1 };
+        pages.push(d.page);
+        days.push(d);
+        if (o.spread) openPair = d;
+      }
     }
   }
 
@@ -4754,6 +4769,9 @@ function generatePlannerPages(o) {
     const monthId = monthPageFor(d.iso);
     const weekId = weekPageFor(d.iso);
     if (HOL && HOL[d.iso]) d.page.holiday = HOL[d.iso];
+    let realWidgets = null;
+    let composed = null;
+    if (o.spread) { realWidgets = d.page.widgets; composed = []; d.page.widgets = composed; }
     plannerHeader(d.page, formatReadableDate(d.iso).toUpperCase(), (HOL && HOL[d.iso]) || '', [
       monthId ? { label: 'Month', target: monthId, color: '#475569' } : null,
       weekId ? { label: 'Week', target: weekId, color: '#475569' } : null,
@@ -4777,6 +4795,15 @@ function generatePlannerPages(o) {
       W.push(createWidgetObject('checkboxes', { title: 'TO-DO LIST', rows: 9, x: 384, y: 308, width: 348, height: 300, accentColor: A }));
       W.push(createWidgetObject('notes', { title: 'NOTES', pattern: 'dot', x: 384, y: 624, width: 348, height: 352, accentColor: A }));
     }
+    if (composed) {
+      d.page.widgets = realWidgets;
+      composed.forEach(w => squeezeWidgetIntoHalf(w, d.half || 0));
+      realWidgets.push(...composed);
+      const nxtDay = days[i + 1];
+      if ((d.half || 0) === 0 && (!nxtDay || nxtDay.page !== d.page)) {
+        realWidgets.push(createWidgetObject('notes', { title: 'NOTES', pattern: 'ruled', x: DESIGN_W / 2 + 18, y: 102, width: DESIGN_W / 2 - 36, height: 874, accentColor: A }));
+      }
+    }
   });
 
   return pages;
@@ -4793,6 +4820,10 @@ async function runPlannerWizard() {
   try {
     if (appState.pages.length > 0) pushUndoSnapshot();
     const pages = generatePlannerPages(o);
+    if (o.spread && o.daily) {
+      const sp = PAGE_PRESETS.a4_landscape;
+      if (sp) { appState.preset = 'a4_landscape'; appState.width = sp.width; appState.height = sp.height; syncPresetSelects(); }
+    }
     pages.forEach(fitPageToCurrentSize);
     appState.title = o.title;
     appState.pages = pages;
@@ -4845,7 +4876,7 @@ function openWizardModal() {
   }
   if (!modal._wired) {
     modal._wired = true;
-    ['wizKind', 'wizYear', 'wizStartMonth', 'wizEndYear', 'wizEndMonth', 'wizStartDate', 'wizIncludeCover', 'wizIncludeOverview', 'wizIncludeMonthly', 'wizIncludeWeekly', 'wizIncludeDaily']
+    ['wizKind', 'wizYear', 'wizStartMonth', 'wizEndYear', 'wizEndMonth', 'wizStartDate', 'wizIncludeCover', 'wizIncludeOverview', 'wizIncludeMonthly', 'wizIncludeWeekly', 'wizIncludeDaily', 'wizSpread']
       .forEach(id => document.getElementById(id)?.addEventListener('change', updateWizardForm));
   }
   updateWizardForm();
@@ -5067,6 +5098,14 @@ function scaleWidgetGeometry(w, sx, sy, W, H) {
   w.height = Math.min(w.height, H);
   w.x = Math.max(0, Math.min(W - w.width, w.x));
   w.y = Math.max(0, Math.min(H - w.height, w.y));
+}
+
+function squeezeWidgetIntoHalf(w, half) {
+  const off = half ? DESIGN_W / 2 : 0;
+  w.x = Math.round(w.x * 0.5) + off;
+  w.width = Math.max(16, Math.round(w.width * 0.5));
+  if (w.width < 70 && w.fontSize) w.fontSize = Math.max(8, Math.round(w.fontSize * 0.72));
+  return w;
 }
 
 function fitPageToCurrentSize(page) {
