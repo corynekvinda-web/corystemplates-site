@@ -4108,7 +4108,15 @@ function paletteColorForNewDivider() {
 // Tabs tile the strip region (y 96..height-96), shrink as sections are added,
 // and the whole stack is vertically centered so all tabs stay visible.
 function computeBinderTabs() {
-  const dividers = getSectionDividers();
+  let dividers = getSectionDividers();
+  let monthTabs = false;
+  if (!dividers.length) {
+    // No section dividers of its own: fall back to the month pages, so a
+    // wizard-built planner still gets the classic built-in month tabs
+    // (JAN, FEB, ...) down the side. Adding any divider takes over.
+    dividers = appState.pages.filter(p => (p.section || '') === 'Monthly' && p.dateISO);
+    monthTabs = dividers.length > 0;
+  }
   if (!dividers.length) return [];
   const W = appState.width;
   const H = appState.height;
@@ -4122,7 +4130,7 @@ function computeBinderTabs() {
   return dividers.map((page, i) => ({
     page,
     idx: i,
-    label: page.section || page.name.replace(/^Divider — /, ''),
+    label: monthTabs ? MONTH_NAMES[parseISODateLocal(page.dateISO).getMonth()].slice(0, 3).toUpperCase() : (page.section || page.name.replace(/^Divider — /, '')),
     color: getDividerTabColor(page, i),
     x: W - TAB_STRIP_WIDTH - 2,
     y: startY + i * (tabH + TAB_GAP),
