@@ -1,0 +1,173 @@
+/* ===== Cory's Templates — iPad / touch layer =====================================
+   Loaded after the web app's own CSS. Everything is scoped to html.touch-ui (touch
+   screens) or html.narrow (portrait iPad) so the desktop look is not changed. */
+
+:root {
+  --sat: env(safe-area-inset-top, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --inv-zoom: 1;
+  --hdr-bottom: 56px;
+}
+
+html.touch-ui, html.touch-ui body { overscroll-behavior: none; }
+html.touch-ui body {
+  height: 100vh; height: 100dvh; width: 100vw;
+  padding: var(--sat) var(--sar) var(--sab) var(--sal);
+  background-color: #0f172a;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+/* The "made for a bigger screen" banner is for phones browsing the website. */
+html.touch-ui #smallScreenNotice { display: none !important; }
+
+/* ---------- tap targets (Apple: 44 x 44 pt) ---------- */
+html.touch-ui header button,
+html.touch-ui header select,
+html.touch-ui header input[type=text] { min-height: 44px; }
+html.touch-ui header button { min-width: 44px; padding-left: 12px; padding-right: 12px; justify-content: center; }
+html.touch-ui header { min-height: 64px; gap: 6px; }
+html.touch-ui main > div:first-child { height: 48px; }       /* page / zoom bar */
+html.touch-ui main > div:first-child button { min-height: 40px; min-width: 40px; font-size: 14px; }
+html.touch-ui main > div:first-child .w-6 { width: 40px; height: 40px; font-size: 18px; }
+html.touch-ui main > div:last-child { height: 32px; }
+html.touch-ui .side-tab-btn { min-height: 48px; font-size: 14px; }
+html.touch-ui aside button { min-height: 44px; }
+html.touch-ui aside input[type=checkbox], html.touch-ui .modal-content input[type=checkbox],
+html.touch-ui #inspectorContent input[type=checkbox] { width: 22px; height: 22px; }
+html.touch-ui #insertPageMenu button, html.touch-ui #newProjectMenu button { min-height: 48px; font-size: 14px; }
+html.touch-ui [role=dialog] button, html.touch-ui .fixed button { min-height: 44px; }
+
+/* 16px inputs: iOS zooms the whole page when a smaller field is focused */
+html.touch-ui input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]):not([type=file]),
+html.touch-ui select, html.touch-ui textarea {
+  font-size: 16px !important; min-height: 44px;
+}
+html.touch-ui input[type=color] { min-width: 44px; min-height: 44px; }
+html.touch-ui input[type=range] { -webkit-appearance: none; appearance: none; height: 36px; background: transparent; touch-action: pan-y; }
+html.touch-ui input[type=range]::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: #334155; }
+html.touch-ui input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; margin-top: -11px; border-radius: 50%; background: #0ea5e9; border: 3px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.5); }
+
+/* ---------- canvas: finger drags boxes, one finger on empty page pans, two fingers pinch ---------- */
+html.touch-ui #canvasViewport { touch-action: none; overscroll-behavior: contain; -webkit-overflow-scrolling: auto; }
+html.touch-ui [data-widget-id],
+html.touch-ui .resize-handle,
+html.touch-ui [data-split-col],
+html.touch-ui [data-split-row] { touch-action: none; }
+html.touch-ui #plannerCanvas { -webkit-user-select: none; user-select: none; }
+
+/* Resize handles: 16 pt dot on screen, 44 pt invisible touch area, whatever the zoom is */
+html.touch-ui .resize-handle {
+  width: calc(16px * var(--inv-zoom)); height: calc(16px * var(--inv-zoom));
+  border-width: calc(2.5px * var(--inv-zoom)); border-radius: calc(4px * var(--inv-zoom));
+}
+html.touch-ui .resize-handle::after { width: calc(44px * var(--inv-zoom)); height: calc(44px * var(--inv-zoom)); }
+html.touch-ui .handle-nw { top: calc(-8px * var(--inv-zoom)); left: calc(-8px * var(--inv-zoom)); }
+html.touch-ui .handle-ne { top: calc(-8px * var(--inv-zoom)); right: calc(-8px * var(--inv-zoom)); }
+html.touch-ui .handle-sw { bottom: calc(-8px * var(--inv-zoom)); left: calc(-8px * var(--inv-zoom)); }
+html.touch-ui .handle-se { bottom: calc(-8px * var(--inv-zoom)); right: calc(-8px * var(--inv-zoom)); }
+html.touch-ui .handle-n { top: calc(-8px * var(--inv-zoom)); left: calc(50% - 8px * var(--inv-zoom)); }
+html.touch-ui .handle-s { bottom: calc(-8px * var(--inv-zoom)); left: calc(50% - 8px * var(--inv-zoom)); }
+html.touch-ui .handle-w { top: calc(50% - 8px * var(--inv-zoom)); left: calc(-8px * var(--inv-zoom)); }
+html.touch-ui .handle-e { top: calc(50% - 8px * var(--inv-zoom)); right: calc(-8px * var(--inv-zoom)); }
+/* Table column / row dividers: fatter grab area.
+   Keep splitters position:absolute (as in the markup). position:relative made the
+   row splitter a flex/grid item with width:100%, which shrunk every body column
+   to about half the header width. Absolute is still a containing block for ::after. */
+html.touch-ui [data-split-col], html.touch-ui [data-split-row] { position: absolute !important; }
+html.touch-ui [data-split-col], html.touch-ui [data-split-row] { touch-action: none; }
+html.touch-ui [data-split-col] { z-index: 40 !important; }
+html.touch-ui [data-split-row] { z-index: 10 !important; }
+/* Column hit area grows sideways only. Row hit area must stay short so that at
+   small zoom it cannot cover the header and steal column-divider drags. */
+html.touch-ui [data-split-col]::after { content: ''; position: absolute; top: 0; bottom: 0; left: calc(-22px * var(--inv-zoom)); right: calc(-22px * var(--inv-zoom)); }
+html.touch-ui [data-split-row]::after { content: ''; position: absolute; left: 0; right: 0; top: -10px; bottom: -10px; }
+
+/* No hover on touch screens: stop "stuck" hover colours after a tap */
+@media (hover: none) {
+  .resize-handle:hover { background: #fff; transform: none; }
+}
+
+/* iPad-only hint bar text */
+html.touch-ui .hint-desktop { display: none; }
+html.touch-ui .hint-touch { display: inline; }
+.hint-touch { display: none; }
+
+/* ---------- portrait / narrow iPads: side panels become slide-over drawers ---------- */
+.drawer-btn { display: none; }
+html.narrow .drawer-btn { display: inline-flex; align-items: center; gap: 6px; }
+#drawerScrim { display: none; }
+html.narrow aside {
+  position: fixed !important; top: var(--hdr-bottom); bottom: var(--sab); z-index: 60;
+  width: min(380px, 86vw) !important; box-shadow: 0 0 40px rgba(0,0,0,.6);
+  transition: transform .22s ease; will-change: transform;
+}
+html.narrow aside:first-of-type  { left: var(--sal); transform: translateX(calc(-100% - 40px)); }
+html.narrow aside:last-of-type { right: var(--sar); transform: translateX(calc(100% + 40px)); }
+html.narrow.drawer-left aside:first-of-type,
+html.narrow.drawer-right aside:last-of-type { transform: translateX(0); }
+html.narrow.drawer-left #drawerScrim, html.narrow.drawer-right #drawerScrim {
+  display: block; position: fixed; inset: 0; top: var(--hdr-bottom); z-index: 55; background: rgba(2,6,23,.45);
+}
+html.narrow #logoText, html.narrow header .sm\:inline { display: none; }
+html.narrow #pagePresetSelect { display: none; }
+html.narrow #docTitleInput { width: 120px; }
+html.narrow header button { padding-left: 9px !important; padding-right: 9px !important; }
+html.narrow #openWizardBtn span { display: none; }
+html.narrow header { padding-left: 8px; padding-right: 8px; }
+html.narrow header .hidden.md\:flex, html.narrow #openWizardBtn { display: flex; }
+html.narrow header #previewModeLabel { display: none; }
+html.narrow header .px-2.5.py-1\.5 span.hidden.sm\:inline { display: none; }
+html.narrow main { width: 100%; }
+
+/* iOS keyboard / rubber-band: the page itself must never scroll */
+html.touch-ui, html.touch-ui body { position: fixed; inset: 0; overflow: hidden; width: 100%; }
+html.touch-ui body { touch-action: manipulation; }
+html.touch-ui aside { -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+
+/* Table dividers: only grabbable once the table is selected (so a tap on an unselected table selects it),
+   and with a finger-sized hit area once it is. */
+html.touch-ui [data-widget-id]:not(.ring-sky-500) [data-split-col],
+html.touch-ui [data-widget-id]:not(.ring-sky-500) [data-split-row] { pointer-events: none; }
+html.touch-ui [data-widget-id].ring-sky-500 .col-splitter { width: 28px !important; right: -14px !important; z-index: 40 !important; }
+html.touch-ui [data-widget-id].ring-sky-500 .row-splitter { height: 22px !important; bottom: -8px !important; z-index: 10 !important; }
+
+/* ---------- v3 fixes ---------- */
+/* icon-only buttons (A- / A+, duplicate / delete box, page list arrows, modal ×) were 12-29 pt wide */
+html.touch-ui button:not(.resize-handle) { min-width: 40px; }
+html.touch-ui #plannerCanvas button { min-width: 0; }
+html.touch-ui #pagesListContainer button { min-width: 40px; margin-left: 2px; }
+/* page rows: name on the first line (tap = open page), the three small actions on their own line so they can be finger-sized */
+html.touch-ui #pagesListContainer > div { flex-wrap: wrap; }
+html.touch-ui #pagesListContainer > div > .min-w-0 { flex: 1 1 100%; }
+html.touch-ui #pagesListContainer > div > .flex-col { flex: 1 1 100%; align-items: flex-end; pointer-events: none; }  /* empty space on that line still opens the page */
+html.touch-ui #pagesListContainer > div > .flex-col button { pointer-events: auto; }
+html.touch-ui #pagesListContainer .flex-col > .flex { gap: 8px; }
+html.touch-ui #widgetQuickActions { gap: 6px; }
+html.touch-ui input[type=checkbox] { width: 24px; height: 24px; flex-shrink: 0; }
+/* Page bar: the page name / date chips pushed "Delete Page" under the zoom "−" button at 1000-1280 pt wide */
+html.touch-ui main > div:first-child { overflow: hidden; }
+html.touch-ui main > div:first-child > div { min-width: 0; }
+@media (min-width: 1000px) and (max-width: 1280px) {
+  html.touch-ui #activePageDateBadge, html.touch-ui #activePageBadge { display: none !important; }
+}
+
+/* Test Links reminder pill */
+#testLinksBanner { display: none; }
+html.links-test-on #testLinksBanner {
+  display: block; position: fixed; z-index: 70; left: 50%; transform: translateX(-50%);
+  top: calc(var(--hdr-bottom) + 56px); max-width: 90vw; padding: 10px 18px; border-radius: 999px;
+  background: #059669; color: #fff; font: 600 14px/1.2 inherit; border: 2px solid #34d399; box-shadow: 0 4px 16px rgba(0,0,0,.5);
+}
+/* Header: at 1000-1279 pt the labelled buttons were wider than the screen, so "Help" was pushed off the right edge
+   (unreachable) - icons only for Save / Load there (titles still say what they do). */
+@media (min-width: 1000px) and (max-width: 1279px) {
+  html.touch-ui #saveJsonBtn > span, html.touch-ui #loadJsonBtn > span { display: none !important; }
+}
+
+/* 1.0.2 app-only features: finger-sized controls in the box properties */
+html.touch-ui #repeatControls button, html.touch-ui #saveWidgetTemplateBtn { min-height: 44px; font-size: 14px; }
+html.touch-ui #repeatControls label { min-height: 36px; font-size: 13px; }
+html.touch-ui .bloc-modal .tpl-card button, html.touch-ui .bloc-modal .shelf-card button { min-height: 44px; }

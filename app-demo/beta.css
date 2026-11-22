@@ -1,0 +1,218 @@
+/* BLOC Planner iPad web beta chrome. No analytics. */
+html.ct-beta body { padding-top: 0; }
+
+#ctIpadNote {
+  flex: 0 0 auto;
+  background: #fbbf24;
+  color: #111827;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  padding: 0.55rem 0.75rem;
+  z-index: 81;
+}
+#ctBetaBanner {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem 0.85rem;
+  flex-wrap: wrap;
+  min-height: 2.25rem;
+  padding: 0.4rem 0.75rem;
+  background: #0b1220;
+  border-bottom: 1px solid #1e293b;
+  color: #e2e8f0;
+  font-size: 13px;
+  line-height: 1.35;
+  z-index: 80;
+  touch-action: manipulation;
+}
+#ctBetaBanner .ct-beta-banner-text { min-width: 0; flex: 1 1 16rem; }
+#ctBetaBanner strong { font-weight: 600; color: #f8fafc; }
+#ctBetaBanner .ct-beta-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+#ctBetaSuggestBtn,
+.ct-beta-store-btn {
+  appearance: none;
+  border: 1px solid #334155;
+  background: #1e293b;
+  color: #f8fafc;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  touch-action: manipulation;
+}
+#ctBetaSuggestBtn:hover,
+.ct-beta-store-btn:hover { background: #334155; }
+.ct-beta-store-btn.ct-beta-primary {
+  background: #0369a1;
+  border-color: #0284c7;
+}
+
+.ct-beta-export-note {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  max-width: 16rem;
+}
+.ct-beta-export-note .ct-beta-note-text {
+  font-size: 10px;
+  line-height: 1.3;
+  color: #94a3b8;
+  white-space: normal;
+  font-weight: 500;
+}
+#exportPdfBtn.ct-beta-blocked,
+#saveJsonBtn.ct-beta-blocked,
+#exportDirectDownloadLink.ct-beta-blocked,
+#exportOpenTabBtn.ct-beta-blocked,
+#exportCopyJsonBtn.ct-beta-blocked {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+#ctBetaBlocked,
+#ctBetaFeedback {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.72);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 90;
+}
+#ctBetaBlocked.is-open,
+#ctBetaFeedback.is-open { display: flex; }
+.ct-beta-card {
+  width: 100%;
+  max-width: 26rem;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 1.1rem 1.15rem 1.15rem;
+  color: #e2e8f0;
+  box-shadow: 0 20px 50px rgba(0,0,0,.45);
+}
+.ct-beta-card h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+.ct-beta-card p { margin: 0 0 0.75rem; font-size: 13px; color: #cbd5e1; line-height: 1.45; }
+.ct-beta-card label { display: block; font-size: 13px; font-weight: 600; color: #cbd5e1; margin: 0.55rem 0 0.2rem; }
+.ct-beta-card input,
+.ct-beta-card textarea {
+  width: 100%;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  color: #f8fafc;
+  font-size: 16px;
+  padding: 0.45rem 0.55rem;
+  font-family: inherit;
+}
+.ct-beta-card textarea { min-height: 5.5rem; resize: vertical; }
+.ct-beta-actions { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.9rem; }
+.ct-beta-card button[type="submit"],
+.ct-beta-primary {
+  background: #0369a1;
+  border: 1px solid #0284c7;
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 0.45rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  min-height: 44px;
+  touch-action: manipulation;
+}
+.ct-beta-card .ct-beta-secondary {
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #e2e8f0;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 0.45rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+.starter-card.ct-beta-starter-locked { position: relative; }
+.ct-beta-lock-badge,
+.ct-beta-free-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.15rem 0.45rem;
+  line-height: 1.2;
+  pointer-events: none;
+}
+.ct-beta-lock-badge {
+  background: #0f172a;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+}
+.starter-card.ct-beta-starter-free { position: relative; }
+.ct-beta-free-badge {
+  background: #064e3b;
+  color: #ecfdf5;
+  border: 1px solid #34d399;
+}
+
+/* iPad toolbar is too tight for the demo-style captions under Save / Export. */
+header .ct-beta-note-text { display: none; }
+header .ct-beta-export-note {
+  display: contents;
+  max-width: none;
+}
+
+/* Save is allowed in the browser; do not grey it out like Export. */
+#saveJsonBtn.ct-beta-blocked,
+#loadJsonBtn.ct-beta-blocked {
+  opacity: 1;
+  cursor: pointer;
+}
+
+/* Browser printing is blocked. Hide the app and show a short notice. */
+#ctBetaPrintNotice { display: none; }
+@media print {
+  html, body {
+    background: #fff !important;
+    color: #111 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  body > *:not(#ctBetaPrintNotice) { display: none !important; }
+  #ctBetaPrintNotice {
+    display: block !important;
+    position: static !important;
+    color: #111 !important;
+    background: #fff !important;
+    font: 16px/1.4 system-ui, -apple-system, 'Segoe UI', sans-serif;
+    padding: 2rem !important;
+    margin: 0 !important;
+  }
+}
