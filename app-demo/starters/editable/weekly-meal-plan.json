@@ -1,0 +1,122 @@
+{
+  "title": "Weekly Meal Plan",
+  "preset": "ipad_portrait",
+  "width": 768,
+  "height": 1024,
+  "zoom": 0.85,
+  "snapEnabled": true,
+  "previewLinks": false,
+  "tabMode": "color",
+  "activePageId": "page_h2luw3uf069",
+  "selectedWidgetId": null,
+  "pages": [
+    {
+      "id": "page_h2luw3uf069",
+      "name": "Weekly Meal Plan",
+      "templateType": "blank",
+      "section": "Home",
+      "dateISO": "",
+      "bgColor": "#ffffff",
+      "bgImage": "",
+      "bgOpacity": 0.25,
+      "widgets": [
+        {
+          "id": "w_04eou0pu065",
+          "type": "navtab",
+          "x": 36,
+          "y": 32,
+          "width": 696,
+          "height": 56,
+          "fontSize": 15,
+          "accentColor": "#0f172a",
+          "bgColor": "#0f172a",
+          "borderColor": "transparent",
+          "borderWidth": 0,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "WEEKLY MEAL PLAN",
+          "subtitle": "The week\u2019s meals and the list that goes with them",
+          "textColor": "#ffffff",
+          "align": "left"
+        },
+        {
+          "id": "w_8o75sdnq066",
+          "type": "logbook",
+          "x": 36,
+          "y": 104,
+          "width": 696,
+          "height": 430,
+          "fontSize": 12,
+          "accentColor": "#0f172a",
+          "bgColor": "#ffffff",
+          "borderColor": "#cbd5e1",
+          "borderWidth": 1,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "MEALS",
+          "rows": 7,
+          "headers": [
+            "Day",
+            "Breakfast",
+            "Lunch",
+            "Dinner"
+          ],
+          "colWidths": [
+            0.13,
+            0.29,
+            0.29,
+            0.29
+          ],
+          "rowHeights": [
+            0.14285714285714285,
+            0.14285714285714285,
+            0.14285714285714285,
+            0.14285714285714285,
+            0.14285714285714285,
+            0.14285714285714285,
+            0.14285714285714285
+          ],
+          "rowSpacing": 58.0
+        },
+        {
+          "id": "w_fnlq3yjj067",
+          "type": "checkboxes",
+          "x": 36,
+          "y": 550,
+          "width": 338,
+          "height": 426,
+          "fontSize": 12,
+          "accentColor": "#0f172a",
+          "bgColor": "#ffffff",
+          "borderColor": "#cbd5e1",
+          "borderWidth": 1,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "SHOPPING LIST",
+          "rows": 12,
+          "shape": "square",
+          "rowSpacing": 33.5
+        },
+        {
+          "id": "w_wjhfyz38068",
+          "type": "notes",
+          "x": 394,
+          "y": 550,
+          "width": 338,
+          "height": 426,
+          "fontSize": 12,
+          "accentColor": "#0f172a",
+          "bgColor": "#ffffff",
+          "borderColor": "#cbd5e1",
+          "borderWidth": 1,
+          "cornerRadius": 6,
+          "targetPageId": "",
+          "title": "PREP NOTES",
+          "pattern": "dot",
+          "spacing": 20,
+          "lines": 20
+        }
+      ]
+    }
+  ]
+}
