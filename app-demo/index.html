@@ -504,6 +504,10 @@
             <span class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Section tab colors</span>
             <button id="tabModeToggleBtn" onclick="setTabMode(appState.tabMode === 'gray' ? 'color' : 'gray')" title="Tap to switch tab colors between color and e-ink gray" class="py-1 px-2 rounded bg-slate-800 hover:bg-slate-700 text-[11px] text-teal-300 border border-slate-700">Color</button>
           </div>
+          <div class="flex items-center justify-between gap-2 pt-1">
+            <span class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Month tabs (when no dividers)</span>
+            <button id="monthTabsToggleBtn" onclick="setMonthTabs(!(appState.monthTabs === true))" title="Show one tab per month down the side of every page" class="py-1 px-2 rounded bg-slate-800 hover:bg-slate-700 text-[11px] text-teal-300 border border-slate-700">Off</button>
+          </div>
         </div>
         <div id="pagesListContainer" class="flex-1 overflow-y-auto p-2.5 space-y-1.5"></div>
       </div>
@@ -663,6 +667,7 @@
             <label class="flex items-center gap-2 cursor-pointer"><input id="wizIncludeDaily" type="checkbox" checked class="w-4 h-4 accent-indigo-500" /> Daily pages</label>
           </div>
           <label class="mt-2 flex items-start gap-2 cursor-pointer text-slate-200"><input id="wizHolidays" type="checkbox" class="w-4 h-4 mt-0.5 accent-indigo-500" /> <span>US holidays <span class="text-slate-500">(federal holidays plus Valentine's Day, Easter, Mother's Day, Father's Day, Halloween, Christmas Eve and New Year's Eve; shown on month calendars and daily pages)</span></span></label>
+          <label class="mt-2 flex items-start gap-2 cursor-pointer text-slate-200"><input id="wizMonthTabs" type="checkbox" checked class="w-4 h-4 mt-0.5 accent-indigo-500" /> <span>Month tabs down the side <span class="text-slate-500">(one tab per month on every page — JAN '26, FEB '26 …; only when the planner has no section dividers of its own)</span></span></label>
         </div>
 
         <div id="wizDailyRow">
@@ -1128,6 +1133,7 @@ let appState = {
   snapEnabled: true,
   previewLinks: false,
   tabMode: 'color',
+  monthTabs: false,
   activePageId: '',
   selectedWidgetId: null,
   pages: []
@@ -1248,6 +1254,7 @@ function cloneAppStateSnapshot() {
     height: appState.height,
     snapEnabled: appState.snapEnabled,
     tabMode: appState.tabMode,
+    monthTabs: appState.monthTabs === true,
     activePageId: appState.activePageId,
     selectedWidgetId: appState.selectedWidgetId,
     pages: appState.pages
@@ -1275,6 +1282,7 @@ function restoreStateSnapshot(snap) {
   appState.height = snap.height || 1024;
   appState.snapEnabled = snap.snapEnabled !== false;
   appState.tabMode = snap.tabMode === 'gray' ? 'gray' : 'color';
+  appState.monthTabs = snap.monthTabs === true;
   appState.pages = Array.isArray(snap.pages) ? snap.pages : [];
   loadImageAssets(snap.assets);
   internPageImages(appState.pages);
@@ -1284,6 +1292,7 @@ function restoreStateSnapshot(snap) {
   appState.selectedWidgetId = snap.selectedWidgetId || null;
 
   syncTabModeToggle();
+  syncMonthTabsToggle();
 
   const titleInput = document.getElementById('docTitleInput');
   if (titleInput) titleInput.value = appState.title;
@@ -4110,10 +4119,10 @@ function paletteColorForNewDivider() {
 function computeBinderTabs() {
   let dividers = getSectionDividers();
   let monthTabs = false;
-  if (!dividers.length) {
-    // No section dividers of its own: fall back to the month pages, so a
-    // wizard-built planner still gets the classic built-in month tabs
-    // (JAN, FEB, ...) down the side. Adding any divider takes over.
+  if (!dividers.length && appState.monthTabs === true) {
+    // Opt-in only (wizard checkbox or the Month tabs toggle): when a planner
+    // has no section dividers of its own, its month pages can serve as the
+    // tabs — JAN '26, FEB '26 … down the side. Adding any divider takes over.
     dividers = appState.pages.filter(p => (p.section || '') === 'Monthly' && p.dateISO);
     monthTabs = dividers.length > 0;
   }
@@ -4130,7 +4139,7 @@ function computeBinderTabs() {
   return dividers.map((page, i) => ({
     page,
     idx: i,
-    label: monthTabs ? MONTH_NAMES[parseISODateLocal(page.dateISO).getMonth()].slice(0, 3).toUpperCase() : (page.section || page.name.replace(/^Divider — /, '')),
+    label: monthTabs ? (() => { const d = parseISODateLocal(page.dateISO); return `${MONTH_NAMES[d.getMonth()].slice(0, 3).toUpperCase()} '${String(d.getFullYear()).slice(2)}`; })() : (page.section || page.name.replace(/^Divider — /, '')),
     color: getDividerTabColor(page, i),
     x: W - TAB_STRIP_WIDTH - 2,
     y: startY + i * (tabH + TAB_GAP),
@@ -4143,6 +4152,19 @@ function computeBinderTabs() {
 function syncTabModeToggle() {
   const btn = document.getElementById('tabModeToggleBtn');
   if (btn) btn.textContent = appState.tabMode === 'gray' ? 'E-ink gray' : 'Color';
+}
+
+function syncMonthTabsToggle() {
+  const btn = document.getElementById('monthTabsToggleBtn');
+  if (btn) btn.textContent = appState.monthTabs === true ? 'On' : 'Off';
+}
+
+function setMonthTabs(on) {
+  pushUndoSnapshot();
+  appState.monthTabs = on === true;
+  syncMonthTabsToggle();
+  renderCanvas();
+  scheduleAutosave();
 }
 
 // Switch Color <-> E-ink gray. Recolors every divider banner to the new
@@ -4537,6 +4559,7 @@ function wizardOptionsFromForm() {
     daily: document.getElementById('wizIncludeDaily').checked,
     dailyPreset: document.getElementById('wizDailyPreset').value || 'classic',
     spread: Boolean(document.getElementById('wizSpread')?.checked),
+    monthTabs: Boolean(document.getElementById('wizMonthTabs')?.checked),
     holidays: Boolean(document.getElementById('wizHolidays')?.checked),
     accent: normalizeHexColor(document.getElementById('wizAccentColor').value) || '#1E3A5F'
   };
@@ -4619,6 +4642,7 @@ function newPlannerPage(name, section, dateISO) {
 
 function generatePlannerPages(o) {
   const A = o.accent;
+  _spreadTabReserve = (o.spread && o.monthTabs) ? 24 : 0;
   const HOL = o.holidays ? usHolidaysForRange(o.startISO, o.endISO) : null;
   const pages = [];
   const months = [];   // { key, year, month, page }
@@ -4809,7 +4833,7 @@ function generatePlannerPages(o) {
       realWidgets.push(...composed);
       const nxtDay = days[i + 1];
       if ((d.half || 0) === 0 && (!nxtDay || nxtDay.page !== d.page)) {
-        realWidgets.push(createWidgetObject('notes', { title: 'NOTES', pattern: 'ruled', x: DESIGN_W / 2 + 18, y: 102, width: DESIGN_W / 2 - 36, height: 874, accentColor: A }));
+        realWidgets.push(createWidgetObject('notes', { title: 'NOTES', pattern: 'ruled', x: (DESIGN_W - _spreadTabReserve) / 2 + 18, y: 102, width: (DESIGN_W - _spreadTabReserve) / 2 - 36, height: 874, accentColor: A }));
       }
     }
   });
@@ -4834,6 +4858,8 @@ async function runPlannerWizard() {
     }
     pages.forEach(fitPageToCurrentSize);
     appState.title = o.title;
+    appState.monthTabs = o.monthTabs === true;
+    syncMonthTabsToggle();
     appState.pages = pages;
     const titleInput = document.getElementById('docTitleInput');
     if (titleInput) titleInput.value = appState.title;
@@ -5108,10 +5134,14 @@ function scaleWidgetGeometry(w, sx, sy, W, H) {
   w.y = Math.max(0, Math.min(H - w.height, w.y));
 }
 
+let _spreadTabReserve = 0;
+
 function squeezeWidgetIntoHalf(w, half) {
-  const off = half ? DESIGN_W / 2 : 0;
-  w.x = Math.round(w.x * 0.5) + off;
-  w.width = Math.max(16, Math.round(w.width * 0.5));
+  const halfW = (DESIGN_W - _spreadTabReserve) / 2;
+  const k = halfW / DESIGN_W;
+  const off = half ? halfW : 0;
+  w.x = Math.round(w.x * k) + off;
+  w.width = Math.max(16, Math.round(w.width * k));
   if (w.width < 70 && w.fontSize) w.fontSize = Math.max(8, Math.round(w.fontSize * 0.72));
   return w;
 }
